@@ -19,10 +19,6 @@ const config = {
     {
       name:"必 应",
       template:"https://www.bing.com/search?q=$s"
-    },
-    {
-      name:"搜 狗",
-      template:"https://www.sogou.com/web?query=$s"
     }
   ],
   selling_ads: true,                  //Selling your domain or not.(turning on may be helpful for selling this domain by showing some ads.)
@@ -37,60 +33,10 @@ const config = {
       }
     ]                        
   },
-  lists: [                            //Url list
-    {
-      name:"技术",
-      icon:"code",
-      list:[
-        {
-          url:"https://oschina.net/",
-          name:"开源中国",
-          desc:"程序员集散地"
-        },
-        {
-          url:"https://v2ex.com",
-          name:"V2EX",
-          desc:"程序员集散地"
-        },
-        {
-          url:"https://csdn.net/",
-          name:"CSDN技术社区",
-          desc:"程序员集散地"
-        },
-        {
-          url:"https://github.com/",
-          name:"Github",
-          desc:"程序员集散地"
-        },
-      ]
-    },
-    {
-      name:"学习",
-      icon:"graduation cap",
-      list:[
-        {
-          url:"https://w3school.com.cn/",
-          name:"W3school在线教程",
-          desc:"程序员集散地"
-        },
-        {
-          url:"https://runoob.com/",
-          name:"菜鸟教程",
-          desc:"程序员集散地"
-        },
-        {
-          url:"https://segmentfault.com/",
-          name:"思否社区",
-          desc:"程序员集散地"
-        },
-        {
-          url:"https://jianshu.com/",
-          name:"简书",
-          desc:"程序员集散地"
-        },
-      ]
-    }
-  ]
+  lists: 
+  [                            //Url list
+
+]
 }
 const el = (tag, attrs, content) => `<${tag} ${attrs.join(" ")}>${content}</${tag}>`;
 
@@ -124,14 +70,14 @@ function getFavicon(url){
  */
 
 function renderIndex(){
-  const footer = el('footer',[],el('div',['class="footer"'],'Powered by' + el('a',['class="ui label"','href="https://github.com/sleepwood/cf-worker-dir"','target="_blank"'],el('i',['class="github icon"'],"") + 'Cf-Worker-Dir') + ' &copy; Base on ' + el('a',['class="ui label"'],el('i',['class="balance scale icon"'],"") + 'MIT License')));
+  const footer = el('footer',[],el('div',['class="footer"'],'' + el('a',['class="ui label"','href=""','target="_blank"'],el('i',['class=""'],"") + '') + '' + el('a',['class="ui label"'],el('i',['class=""'],"") + '')));
   return renderHeader() + renderMain() + footer;
 }
 
 function renderHeader(){
   const item = (template,name) => el('a',['class="item"',`data-url="${template}"`],name);
 
-  var nav = el('div',['class="ui large secondary inverted menu"'],el('div',['class="item"'],el('p',['id="hitokoto"'],'条条大路通罗马')))
+  var nav = el('div',['class="ui large secondary inverted menu"'],el('div',['class="item"'],el('p',['id="hitokoto"'],'')))
   var title = el('h1',['class="ui inverted header"'],el('i',[`class="${config.logo_icon} icon"`],"") + el('div',['class="content"'],config.title + el('div',['class="sub header"'],config.subtitle)));
   var menu = el('div',['id="sengine"','class="ui bottom attached tabular inverted secondary menu"'],el('div',['class="header item"'],'&nbsp;') + config.search_engine.map((link,key) =>{
     if(key == 0){
@@ -140,8 +86,8 @@ function renderHeader(){
       return item(link.template,link.name);
     }
   }).join(""))
-  var input = el('div',['class="ui left corner labeled right icon fluid large input"'],el('div',['class="ui left corner label"'],el('img',['id="search-fav"','class="left floated avatar ui image"','src="https://www.baidu.com/favicon.ico"'],"")) + el('input',['id="searchinput"','type="search"','placeholder="搜索你想要知道的……"','autocomplete="off"'],"") + el('i',['class="inverted circular search link icon"'],""));
-  return el('header',[],el('div',['id="head"','class="ui inverted vertical masthead center aligned segment"'],(config.hitokoto ? el('div',['id="nav"','class="ui container"'],nav) : "") + el('div',['id="title"','class="ui text container"'],title + (config.search ? input + menu :"") + `${config.selling_ads ? '<div><a id="menubtn" class="red ui icon inverted button"><i class="heart icon"></i> 喜欢此域名 </a></div>' : ''}`)))
+  var input = el('div',['class="ui left corner labeled right icon fluid large input"'],el('div',['class="ui left corner label"'],el('img',['id="search-fav"','class="left floated avatar ui image"','src="https://www.baidu.com/favicon.ico"'],"")) + el('input',['id="searchinput"','type="search"','placeholder=""','autocomplete="off"'],"") + el('i',['class="inverted circular search link icon"'],""));
+  return el('header',[],el('div',['id="head"','class="ui inverted vertical masthead center aligned segment"'],(config.hitokoto ? el('div',['id="nav"','class="ui container"'],nav) : "") + el('div',['id="title"','class="ui text container"'],title + (config.search ? input + menu :"") + `${config.selling_ads ? '' : ''}`)))
 }
 
 function renderMain() {
@@ -190,7 +136,7 @@ function renderHTML(index,seller) {
   <body>
     ${index}
     ${config.selling_ads ? seller : ''}
-    <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+    <script src="" defer></script>
     <script>
       $('#sengine a').on('click', function (e) {
         $('#sengine a.active').toggleClass('active');
